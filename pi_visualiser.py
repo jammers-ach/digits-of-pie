@@ -4,14 +4,14 @@ A simple script that makes an animated version of the digits of pi
 '''
 from __future__ import division
 import operator
-
+from plotter import plot
 
 digit_count = 0 # counting our digits
 digit_distribution = dict([ (x,0) for x in range(0,10)]) #distribution of digits
 
 
 filename = 'million_pi.txt' #filename with the digits
-limit = 2000 #when do we stop
+limit = 9000 #when do we stop
 
 def dominant_digit():
     '''which digit so far has appeared the most'''
@@ -19,10 +19,11 @@ def dominant_digit():
     dominant = sorted_distribution[-1]
     return dominant
 
-def progress_print():
+def progress_print(digit):
     '''Does a simple console print of our progress'''
-    print "Digit %09s "% digit_count
-    print digit_distribution_percentage(),dominant_digit()
+    print "Digit %11s %d"% (digit_count,dominant_digit()[0])
+    #print digit_distribution_percentage(),dominant_digit()
+    plot(digit_distribution_percentage(),digit_count,digit)
 
 def digit_distribution_percentage():
     '''Digit distribution but as a %'''
@@ -38,7 +39,7 @@ for line in f:
         if(c.isdigit()):
             digit_count += 1
             digit_distribution[int(c)] += 1
-            progress_print()
+            progress_print(int(c))
 
         if(digit_count >= limit):
             print "END"

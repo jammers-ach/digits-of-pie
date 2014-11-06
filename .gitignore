@@ -54,3 +54,6 @@ docs/_build/
 
 *.swp
 *.swo
+
+images/*.png
+images/*.gif
